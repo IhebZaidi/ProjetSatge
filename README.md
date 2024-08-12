@@ -4,33 +4,29 @@
 ## Structure du Projet
 
 ```
-your_project/
+projet-stage /
 │
 ├── app/
-│   ├── __init__.py
 │   ├── main.py
 │   ├── dependencies.py
 │   ├── models/
-│   │   ├── __init__.py
 │   │   ├── random_forest.py
 │   │   ├── lightgbm.py
 │   │   ├── xgboost.py
 │   │   ├── lstm.py
 │   ├── utils/
-│   │   ├── __init__.py
 │   │   ├── data_processing.py
 │   │   ├── evaluation.py
 │   ├── routes/
-│   │   ├── __init__.py
 │   │   ├── file_upload.py
 │   │   ├── train.py
-│   │   ├── static_files.py  # Nouveau fichier pour gérer les fichiers statiques
-│   ├── state.py  # Nouveau fichier pour gérer l'état de l'application
+│   │   ├── static_files.py 
+│   ├── state.py 
 ├── plots/
 │   └── (fichiers de graphiques générés)
 │
-├── Dockerfile  # Fichier pour containeriser l'application
-└── requirements.txt  # Liste des dépendances Python
+├── Dockerfile  
+└── requirements.txt 
 ```
 
 ## Installation
@@ -39,7 +35,7 @@ your_project/
 
    ```bash
    git https://github.com/IhebZaidi/ProjetSatge.git
-   cd ProjetSatge
+   cd projet-stage 
    ```
 
 2. **Créer un environnement virtuel :**
@@ -100,13 +96,13 @@ Pour containeriser l'application, vous pouvez utiliser le `Dockerfile` inclus. S
 1. **Construire l'image Docker :**
 
    ```bash
-   docker build -t ProjetSatge .
+   docker build -t projet-stage .
    ```
 
 2. **Exécuter le conteneur :**
 
    ```bash
-   docker run -p 8000:8000 ProjetSatge
+   docker run -p 8000:8000 projet-stage 
    ```
 
 L'application sera disponible sur `http://127.0.0.1:8000`.
