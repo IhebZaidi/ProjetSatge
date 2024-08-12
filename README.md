@@ -38,8 +38,8 @@ your_project/
 1. **Cloner le dépôt :**
 
    ```bash
-   git clone https://votre-repo.git
-   cd your_project
+   git https://github.com/IhebZaidi/ProjetSatge.git
+   cd ProjetSatge
    ```
 
 2. **Créer un environnement virtuel :**
@@ -100,13 +100,13 @@ Pour containeriser l'application, vous pouvez utiliser le `Dockerfile` inclus. S
 1. **Construire l'image Docker :**
 
    ```bash
-   docker build -t your_project_image .
+   docker build -t ProjetSatge .
    ```
 
 2. **Exécuter le conteneur :**
 
    ```bash
-   docker run -p 8000:8000 your_project_image
+   docker run -p 8000:8000 ProjetSatge
    ```
 
 L'application sera disponible sur `http://127.0.0.1:8000`.
