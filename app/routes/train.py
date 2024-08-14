@@ -1,4 +1,3 @@
-# app/routes/train.py
 from fastapi import APIRouter, Query, HTTPException
 import numpy as np
 import matplotlib.pyplot as plt
@@ -6,27 +5,17 @@ from app.utils.data_processing import create_features
 from app.utils.evaluation import evaluate_model
 from pathlib import Path
 import wandb
-from app.state import state
+from app.state import State  # Importer State pour utiliser le Singleton
 from sklearn.model_selection import train_test_split
 
-from fastapi import FastAPI, File, UploadFile, HTTPException, Query
-from fastapi.responses import StreamingResponse
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from io import BytesIO
-from pathlib import Path
 from sklearn.ensemble import RandomForestRegressor
 from lightgbm import LGBMRegressor
 from xgboost import XGBRegressor
-from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error, mean_absolute_percentage_error, \
-    explained_variance_score
-from sklearn.model_selection import train_test_split
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense
 from tensorflow.keras.optimizers import Adam
-import wandb
+
 router = APIRouter()
 
 plot_dir = Path("plots")
@@ -34,10 +23,16 @@ plot_dir.mkdir(exist_ok=True)
 
 AVAILABLE_MODELS = ['RandomForest', 'LightGBM', 'XGBoost', 'LSTM']
 
+
 @router.post("/train_model/")
-async def train_model(model_name: str = Query(..., enum=AVAILABLE_MODELS, description="Choose model from available options")):
+async def train_model(
+        model_name: str = Query(..., enum=AVAILABLE_MODELS, description="Choose model from available options")):
+    # Utiliser l'instance singleton de State
+    state = State.get_instance()
+
     if state.uploaded_df is None:
-        raise HTTPException(status_code=400, detail="No CSV file has been uploaded yet. Please upload a CSV file first.")
+        raise HTTPException(status_code=400,
+                            detail="No CSV file has been uploaded yet. Please upload a CSV file first.")
 
     if model_name not in AVAILABLE_MODELS:
         raise HTTPException(status_code=400, detail="Invalid model name. Choose from the available models.")
@@ -94,8 +89,10 @@ async def train_model(model_name: str = Query(..., enum=AVAILABLE_MODELS, descri
     plot_file = plot_dir / f"{model_name}_plot.png"
     plt.figure(figsize=(14, 7))
 
-    plt.plot(state.uploaded_df['Date'].iloc[:split_index], state.uploaded_df['sales'].iloc[:split_index], label='Training Sales', color='blue')
-    plt.plot(state.uploaded_df['Date'].iloc[split_index:split_index + len(y_test)], state.uploaded_df['sales'].iloc[split_index:split_index + len(y_test)], label='Test Sales', color='green')
+    plt.plot(state.uploaded_df['Date'].iloc[:split_index], state.uploaded_df['sales'].iloc[:split_index],
+             label='Training Sales', color='blue')
+    plt.plot(state.uploaded_df['Date'].iloc[split_index:split_index + len(y_test)],
+             state.uploaded_df['sales'].iloc[split_index:split_index + len(y_test)], label='Test Sales', color='green')
     plt.plot(test_dates, y_pred, label=f'{model_name} Predictions', color='orange')
 
     plt.legend()
@@ -108,4 +105,5 @@ async def train_model(model_name: str = Query(..., enum=AVAILABLE_MODELS, descri
 
     plot_url = f"http://localhost:8000/static/{plot_file.name}"
 
-    return {"message": f"{model_name} model trained successfully", "metrics": {"MSE": mse, "RMSE": rmse, "R2": r2, "MAE": mae, "MAPE": mape, "EVS": evs}, "plot_url": plot_url}
+    return {"message": f"{model_name} model trained successfully",
+            "metrics": {"MSE": mse, "RMSE": rmse, "R2": r2, "MAE": mae, "MAPE": mape, "EVS": evs}, "plot_url": plot_url}
