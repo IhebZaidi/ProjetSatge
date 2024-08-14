@@ -8,12 +8,12 @@ AVAILABLE_MODELS = ['RandomForest', 'LightGBM', 'XGBoost', 'LSTM']
 
 def get_model(model_name: str = Query(..., enum=AVAILABLE_MODELS)):
     if model_name == 'RandomForest':
-        return RandomForestModel()
+        return RandomForestModel.get_instance()
     elif model_name == 'LightGBM':
-        return LightGBMModel()
+        return LightGBMModel.get_instance()
     elif model_name == 'XGBoost':
-        return XGBoostModel()
+        return XGBoostModel.get_instance()
     elif model_name == 'LSTM':
-        return LSTMModel()
+        return LSTMModel.get_instance()
     else:
         raise HTTPException(status_code=400, detail="Invalid model name.")

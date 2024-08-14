@@ -107,4 +107,6 @@ Pour containeriser l'application, vous pouvez utiliser le `Dockerfile` inclus. S
 
 L'application sera disponible sur `http://127.0.0.1:8000`.
 
+## Contribuer
 
+Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou à soumettre une pull request.
