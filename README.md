@@ -9,6 +9,7 @@ projet-stage /
 ├── app/
 │   ├── main.py
 │   ├── dependencies.py
+│   ├── file_manager.py
 │   ├── models/
 │   │   ├── random_forest.py
 │   │   ├── lightgbm.py
