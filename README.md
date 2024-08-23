@@ -25,7 +25,11 @@ projet-stage /
 │   ├── state.py 
 ├── plots/
 │   └── (fichiers de graphiques générés)
-│
+├── frontend/
+│   ├── img.png
+│   ├── index.html
+│   ├── style.css
+│   ├── script.js
 ├── Dockerfile  
 └── requirements.txt 
 ```
