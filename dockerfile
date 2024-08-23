@@ -14,6 +14,8 @@ WORKDIR /app
 
 # Copy the requirements.txt file
 COPY requirements.txt .
+# Ajoutez ceci pour le frontend
+COPY ./frontend /app/frontend
 
 # Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt

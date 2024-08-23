@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prévision des Séries Temporelles - Elyadata</title>
+    <link rel="stylesheet" href="/frontend/style.css">
+</head>
+<body>
+    <header>
+        <img src="frontend/img.png" alt="Elyadata Logo" class="logo">
+    </header>
+
+    <main>
+        <h1>Prévision des Séries Temporelles</h1>
+
+        <section>
+            <h2>Upload de Fichiers CSV</h2>
+            <form id="uploadForm">
+                <input type="file" id="fileInput" />
+                <button type="submit">Upload CSV</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Entraînement du Modèle</h2>
+            <form id="trainForm">
+                <select id="modelSelect">
+                    <option value="RandomForest">Random Forest</option>
+                    <option value="LightGBM">LightGBM</option>
+                    <option value="XGBoost">XGBoost</option>
+                    <option value="LSTM">LSTM</option>
+                </select>
+                <button type="submit">Entraîner le Modèle</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Graphique des Prévisions</h2>
+            <img id="plot" src="" alt="Graphique généré">
+        </section>
+        <section>
+            <h2>Métriques de Performance</h2>
+            <div id="metrics"></div>
+        </section>
+    </main>
+
+    <script src="/frontend/script.js"></script>
+</body>
+</html>
