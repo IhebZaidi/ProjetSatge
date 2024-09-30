@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+pandas
+numpy
+matplotlib
+scikit-learn
+tensorflow
+lightgbm
+xgboost
+wandb
+tabulate
+python-multipart
+pathlib
